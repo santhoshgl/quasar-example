@@ -29,3 +29,11 @@ yarn build
 ### Customize the configuration
 
 See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+
+### Maintainers
+
+Rudra - @ramrudra
+
+Pallavi - @pallavi4
+
+Sowndarya - @sowndarya.5646
