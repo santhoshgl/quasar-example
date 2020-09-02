@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN yarn global add @quasar/cli
 COPY . .
+EXPOSE 8080
 # build stage
 FROM develop-stage as build-stage
 RUN yarn
