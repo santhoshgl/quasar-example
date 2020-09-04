@@ -2,28 +2,33 @@
 
 Whizant ui
 
-## Install the dependencies
+## Local Development Setup
 
-```bash
-yarn
+If it's not already done, clone the `local-traefik` repository
+
+```console
+$ mkdir -p ${PROJECT_BASE_DIR}/global/common-utils
+$ cd ${PROJECT_BASE_DIR}/global/common-utils
+$ git clone git@gitlab.com:cilalabs/global/common-utils/local-traefik.git
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-
-```bash
-yarn dev
+Run traefik
+```console
+$ cd local-traefik
+$ make create-traefik-network-once
+$ make up
 ```
 
-### Lint the files
-
-```bash
-yarn run lint
+Clone this repository
+```
+$ mkdir -p ${PROJECT_BASE_DIR}/whizant
+$ git clone git@gitlab.com:cilalabs/whizant/whizant-ui.git
 ```
 
-### Build the app for production
-
-```bash
-yarn build
+Run the application
+```
+$ cd whizant-ui
+$ docker-compose up
 ```
 
 ### Customize the configuration
