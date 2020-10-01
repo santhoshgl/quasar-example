@@ -1,8 +1,8 @@
 {
-  "name": "whizant-ui",
+  "name": "example-ui",
   "version": "0.0.1",
-  "description": "Whizant ui ",
-  "productName": "Whizant",
+  "description": "UI Starter kit for CILA Incubator",
+  "productName": "Example",
   "author": "Rudra <ramrudra.p@gmail.com>",
   "private": true,
   "scripts": {
