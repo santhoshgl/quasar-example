@@ -5,7 +5,7 @@ networks:
     external: true
 
 services:
-  whizant-ui:
+  example-ui:
     build:
       context: .
       target: "develop-stage"
@@ -16,4 +16,4 @@ services:
       - cila-dev
     labels:
       - traefik.enable=true
-      - traefik.http.routers.whizant-ui.rule=Host(`whizant.cila.test`)
+      - traefik.http.routers.whizant-ui.rule=Host(`example.cila.test`)
