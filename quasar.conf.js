@@ -6,6 +6,7 @@
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 /* eslint-env node */
+const path = require("path");
 
 module.exports = function(/* ctx */) {
   return {
@@ -18,7 +19,7 @@ module.exports = function(/* ctx */) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
-    boot: ["axios"],
+    boot: [],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: ["app.scss"],
@@ -65,6 +66,11 @@ module.exports = function(/* ctx */) {
           loader: "eslint-loader",
           exclude: /node_modules/
         });
+        cfg.resolve.alias = {
+          ...cfg.resolve.alias,
+          "@api": path.resolve(__dirname, "./src/api"),
+          "@utils": path.resolve(__dirname, "./src/utils")
+        };
       }
     },
 
@@ -94,7 +100,7 @@ module.exports = function(/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: ["Loading", "Cookies"]
     },
 
     // animations: 'all', // --- includes all animations
@@ -111,9 +117,9 @@ module.exports = function(/* ctx */) {
       workboxPluginMode: "GenerateSW", // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: `whizant`,
-        short_name: `whizant`,
-        description: `Whizant ui `,
+        name: `Example`,
+        short_name: `Example`,
+        description: `Example ui `,
         display: "standalone",
         orientation: "portrait",
         background_color: "#ffffff",
@@ -176,7 +182,7 @@ module.exports = function(/* ctx */) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: "whizant-ui"
+        appId: "example-ui"
       },
 
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration
