@@ -1,42 +1,44 @@
 import axios from "axios";
 import qs from "qs";
 import authRefreshInterceptor from "axios-auth-refresh";
-
 import { setToken, getToken } from "@utils/auth";
 
-const Authorization = getToken();
 const baseURL = `${process.env.API}/v1`;
+const contentType = {
+  json: "application/json",
+  form: "multipart/form-data"
+};
 
 const axiosInstance = axios.create({
   baseURL,
   headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    Authorization
+    Accept: contentType.json,
+    "Content-Type": contentType.json
   },
   paramsSerializer: params => {
     return qs.stringify(params, { arrayFormat: "brackets" });
   },
   transformResponse: [
-    apiData => {
-      if (apiData && apiData !== "") {
-        const { data } = JSON.parse(apiData);
+    apiResponse => {
+      if (apiResponse) {
+        const { data } = JSON.parse(apiResponse);
         return data;
       }
-      return apiData;
+      return apiResponse;
     }
   ]
 });
 
+axiosInstance.interceptors.request.use(config => {
+  const token = getToken();
+  if (token) config.headers.Authorization = token;
+  return config;
+});
+
 const refreshToken = failedRequest => {
   return axiosInstance.post(`${baseURL}/users/token`, {}).then(({ data }) => {
-    const token = data.idToken;
-    setToken(token);
-    axiosInstance.interceptors.request.use(function(config) {
-      config.headers.Authorization = token;
-      return config;
-    });
-    failedRequest.response.config.headers["Authorization"] = token;
+    setToken(data.idToken);
+    failedRequest.response.config.headers["Authorization"] = data.idToken;
     return Promise.resolve();
   });
 };
@@ -45,13 +47,9 @@ authRefreshInterceptor(axiosInstance, refreshToken);
 
 export const formRequest = {
   post: (url, data) =>
-    axiosInstance.post(url, data, {
-      "Content-Type": "multipart/form-data"
-    }),
+    axiosInstance.post(url, data, { "Content-Type": contentType.form }),
   put: (url, data) =>
-    axiosInstance.put(url, data, {
-      "Content-Type": "multipart/form-data"
-    })
+    axiosInstance.put(url, data, { "Content-Type": contentType.form })
 };
 
 const request = {
