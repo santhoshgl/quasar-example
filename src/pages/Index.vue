@@ -1,8 +1,6 @@
 <template>
   <q-page class="flex flex-center">
     <div class="text-center container">
-      <q-img src="~assets/CILA-INCUBATOR-LOGO-CO.png" />
-      <div class="text-h4">UI Starter Kit</div>
     </div>
   </q-page>
 </template>

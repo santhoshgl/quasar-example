@@ -3,7 +3,7 @@ import qs from "qs";
 import authRefreshInterceptor from "axios-auth-refresh";
 import { setToken, getToken } from "@utils/auth";
 
-const baseURL = `${process.env.API}/v1`;
+const baseURL = "https://jsonplaceholder.typicode.com";
 const contentType = {
   json: "application/json",
   form: "multipart/form-data"
